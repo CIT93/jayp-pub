@@ -1,2 +1,2 @@
 # jayp-pub
-public repository for CIT-93, Sprint 2024
+public repository for CIT-93, Spring 2024
