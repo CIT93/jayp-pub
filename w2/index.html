@@ -9,5 +9,282 @@
 <body>
     <h1>Jay's Carbon Footprint</h1>
     <h2 id="priFootprint">(unknown or error)</h2>
+
+    <hr><!-- -- Extra stuff beyond the assignment, begins here. -- -->
+    <p>
+        <div>I had some free time this weekend, so...</div>
+        <div>Let's learn some extra stuff!</div>
+    </p>
+    <h1>Calculate your own Carbon Footprint!</h1>
+    <p><b><u>Instructions</u></b>:<br>
+        Just answer each of the questions/sections below by selecting the
+        radio buttons and checkboxes that best apply to you. Then press
+        the Recalculate button at the very end!
+    </p>
+
+    <!-- The focus is on learning JavaScript, not HTML, so we'll make the controls super-simple. -->
+    <fieldset>
+        <legend>I share a house or apartment with:</legend>
+        <div>
+            <input type="radio" id="radHouseholdAlone" name="household" value=14 checked />
+            <label for="radHouseholdAlone">Nobody, I live alone.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHousehold1" name="household" value=12 />
+            <label for="radHousehold1">1 other person.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHousehold2" name="household" value=10 />
+            <label for="radHousehold2">2 other people.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHousehold3" name="household" value=8 />
+            <label for="radHousehold3">3 other people.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHousehold4" name="household" value=6 />
+            <label for="radHousehold4">4 other people.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHousehold5" name="household" value=4 />
+            <label for="radHousehold5">5 other people.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHouseholdGT5" name="household" value=2 />
+            <label for="radHouseholdGT5">more than 5 other people.</label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>The size of my house is:</legend>
+        <div>
+            <input type="radio" id="radHouseLarge" name="housesize" value=10 checked />
+            <label for="radHouseLarge">Large.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHouseMedium" name="housesize" value=7 />
+            <label for="radHouseMedium">Medium.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHouseSmall" name="housesize" value=4 />
+            <label for="radHouseSmall">Small.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHouseApartment" name="housesize" value=2 />
+            <label for="radHouseApartment">an Apartment.</label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>The kind of food I eat is:</legend>
+        <div>
+            <input type="radio" id="radFoodCarnivore" name="foodtype" value=10 checked />
+            <label for="radFoodCarnivore">Domestic meat on a daily basis.</label>
+        </div>
+        <div>
+            <input type="radio" id="radFoodOmnivore" name="foodtype" value=8 />
+            <label for="radFoodOmnivore">Domestic meat a few times a week.</label>
+        </div>
+        <div>
+            <input type="radio" id="radFoodVegetarian" name="foodtype" value=4 />
+            <label for="radFoodVegetarian">Vegetarian.</label>
+        </div>
+        <div>
+            <input type="radio" id="radFoodVegan" name="foodtype" value=2 />
+            <label for="radHouseApartment">Vegan, or only wild meat.</label>
+        </div>
+        <div>
+            <input type="checkbox" id="cbFoodPrepackaged" name="foodPrepackaged" value=12 checked />
+            <label for="cbFoodPrepackaged"><b>AND</b>, most of the food I eat is prepackaged convenience food.</label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>I run my dishwasher:</legend>
+        <div>
+            <input type="radio" id="radDishGT9" name="dishwasher" value=3 checked />
+            <label for="radDishGT9">More than 9 times per week.</label>
+        </div>
+        <div>
+            <input type="radio" id="radDish4-9" name="dishwasher" value=2 />
+            <label for="radDish4-9">4 to 9 times per week.</label>
+        </div>
+        <div>
+            <input type="radio" id="radDish1-3" name="dishwasher" value=1 />
+            <label for="radDish1-3">1 to 3 times per week.</label>
+        </div>
+        <div>
+            <input type="radio" id="radDishNone" name="dishwasher" value=0 />
+            <label for="radDishNone">Never, I don't have a dishwasher.</label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>I run my washing machine:</legend>
+        <div>
+            <input type="radio" id="radLaundryGT9" name="laundry" value=3 checked />
+            <label for="radLaundryGT9">More than 9 times per week.</label>
+        </div>
+        <div>
+            <input type="radio" id="radLaundry4-9" name="laundry" value=2 />
+            <label for="radLaundry4-9">4 to 9 times per week.</label>
+        </div>
+        <div>
+            <input type="radio" id="radLaundry1-3" name="laundry" value=1 />
+            <label for="radLaundry1-3">1 to 3 times per week.</label>
+        </div>
+        <div>
+            <input type="radio" id="radLaundryNone" name="laundry" value=0 />
+            <label for="radLaundryNone">Never, I don't have a washing machine.</label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Each YEAR, I buy this many new pieces of furniture, electronics, or other household gadgets:</legend>
+        <div>
+            <input type="radio" id="radPurchaseGT7" name="purchases" value=10 checked />
+            <label for="radPurchaseGT7">More than 7.</label>
+        </div>
+        <div>
+            <input type="radio" id="radPurchase5-7" name="purchases" value=8 />
+            <label for="radPurchase5-7">Betwen 5 and 7.</label>
+        </div>
+        <div>
+            <input type="radio" id="radPurchase3-5" name="purchases" value=6 />
+            <label for="radPurchase3-5">Betwen 3 and 5.</label>
+        </div>
+        <div>
+            <input type="radio" id="radPurchaseLT3" name="purchases" value=4 />
+            <label for="radPurchaseLT3">Less than 3.</label>
+        </div>
+        <div>
+            <input type="radio" id="radPurchaseSecondhand" name="purchases" value=2 />
+            <label for="radPurchaseSecondhand">Almost none, or only secondhand items.</label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>The number of garbage cans I fill each week is:</legend>
+        <div>
+            <input type="radio" id="radGarbage4" name="garbage" value=50 checked />
+            <label for="radGarbage4">4 or more.</label>
+        </div>
+        <div>
+            <input type="radio" id="radGarbage3" name="garbage" value=40 />
+            <label for="radGarbage3">3.</label>
+        </div>
+        <div>
+            <input type="radio" id="radGarbage2" name="garbage" value=30 />
+            <label for="radGarbage2">2.</label>
+        </div>
+        <div>
+            <input type="radio" id="radGarbage1" name="garbage" value=20 />
+            <label for="radGarbage1">1.</label>
+        </div>
+        <div>
+            <input type="radio" id="radGarbageHalf" name="garbage" value=5 />
+            <label for="radGarbageHalf">Only half a garbage can or less.</label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>I regularly recycle the following items:</legend>
+        <div>
+            <input type="checkbox" id="cbRecycleGlass" name="recycle" value=2 />
+            <label for="cbRecycleGlass">Glass.</label>
+        </div>
+        <div>
+            <input type="checkbox" id="cbRecyclePlastic" name="recycle" value=2 />
+            <label for="cbRecyclePlastic">Plastic.</label>
+        </div>
+        <div>
+            <input type="checkbox" id="cbRecyclePaper" name="recycle" value=2 />
+            <label for="cbRecyclePaper">Paper.</label>
+        </div>
+        <div>
+            <input type="checkbox" id="cbRecycleAluminum" name="recycle" value=2 />
+            <label for="cbRecycleAluminum">Aluminum.</label>
+        </div>
+        <div>
+            <input type="checkbox" id="cbRecycleSteel" name="recycle" value=2 />
+            <label for="cbRecycleSteel">Steel.</label>
+        </div>
+        <div>
+            <input type="checkbox" id="cbRecycleFood" name="recycle" value=2 />
+            <label for="cbRecycleFood">Food waste (composting).</label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>I use my personal vehicle:</legend>
+        <div>
+            <input type="radio" id="radVehicle15K" name="vehicle" value=12 checked />
+            <label for="radVehicle15K">More than 15,000 miles per year.</label>
+        </div>
+        <div>
+            <input type="radio" id="radVehicle10-15" name="vehicle" value=10 />
+            <label for="radVehicle10-15">Between 10,000 and 15,000 miles per year.</label>
+        </div>
+        <div>
+            <input type="radio" id="radVehicle1-10" name="vehicle" value=6 />
+            <label for="radVehicle1-10">Between 1,000 and 10,000 miles per year.</label>
+        </div>
+        <div>
+            <input type="radio" id="radVehicleLT1" name="vehicle" value=4 />
+            <label for="radVehicleLT1">Less than 1,000 miles per year.</label>
+        </div>
+        <div>
+            <input type="radio" id="radVehicleNone" name="vehicle" value=0 />
+            <label for="radVehicleNone">Never, I don't own my own car.</label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>I use PUBLIC transportation:</legend>
+        <div>
+            <input type="radio" id="radPublic20K" name="publicTransport" value=12 checked />
+            <label for="radPublic20K">More than 20,000 miles per year.</label>
+        </div>
+        <div>
+            <input type="radio" id="radPublic15-20" name="publicTransport" value=10 />
+            <label for="radPublic15-20">Between 15,000 and 20,000 miles per year.</label>
+        </div>
+        <div>
+            <input type="radio" id="radPublic10-15" name="publicTransport" value=6 />
+            <label for="radPublic10-15">Between 10,000 and 15,000 miles per year.</label>
+        </div>
+        <div>
+            <input type="radio" id="radPublic1-10" name="publicTransport" value=4 />
+            <label for="radPublic1-10">Between 1,000 and 10,000 miles per year.</label>
+        </div>
+        <div>
+            <input type="radio" id="radPublicLT1" name="publicTransport" value=2 />
+            <label for="radPublicLT1">Less than 1,000 miles per year.</label>
+        </div>
+        <div>
+            <input type="radio" id="radPublicNone" name="publicTransport" value=0 />
+            <label for="radPublicNone">Never, I don't own my own car.</label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>In a typical year, I take flights:</legend>
+        <div>
+            <input type="radio" id="radFlightsFar" name="flights" value=20 checked />
+            <label for="radFlightsFar">To other continents.</label>
+        </div>
+        <div>
+            <input type="radio" id="radFlightsMid" name="flights" value=6 />
+            <label for="radFlightsMid">To nearby states or countries.</label>
+        </div>
+        <div>
+            <input type="radio" id="radFlightsNear" name="flights" value=2 />
+            <label for="radFlightsNear">Only short distances, such as within my state.</label>
+        </div>
+    </fieldset>
+
+    <h2>Your Carbon Footprint is:</h2>
+    <h3 id="pubFootprint">(not yet calculated)</h3>
+    <button onclick="calculatePubFootprint()">Recalculate!</button>
 </body>
 </html>
