@@ -7,6 +7,58 @@
     <script defer src="main.js"></script>
 </head>
 <body>
-    
+    <h1>Let's calculate your Carbon Footprint!</h1>
+    <h2>(This is a work in progress. So far, we only check Household Size and Home Size.)</h2>
+
+    <fieldset>
+        <legend>Household Size:</legend>
+        <div>
+            <!--
+                The magic here is in the "oninput" attribute. Any element with this attribute set will call
+                the named JavaScript function every time its input changes. For a textbox like this one,
+                that means it is called for every character the user types!
+
+                Notice the use of this.value as the argument. For those of you familiar with object oriented
+                programming, it means exactly what you think it means. For those of you who are not, then
+                maybe we will learn it later in this class, but the short answer is that it passes the current
+                text contained in the textbox to our function.
+            -->
+            <input type="text" id="textHouseholdSize" name="household" oninput="determineHouseholdPts(this.value)" />
+            <label for="textHouseholdSize">Type in how many people are in your household (including yourself)?</label>
+        </div>
+    </fieldset>
+
+    <!--
+        Notice that this "oninput" is at the fieldset level. This makes it trigger on a change to any of
+        the radio buttons within this fieldset, so we don't have to add it to every single radio button
+        individually.
+    -->
+    <fieldset oninput="determineHouseSizePts()">
+        <legend>The size of my house is:</legend>
+        <div>
+            <input type="radio" id="radHouseLarge" name="housesize" value=10 />
+            <label for="radHouseLarge">Large.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHouseMedium" name="housesize" value=7 />
+            <label for="radHouseMedium">Medium.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHouseSmall" name="housesize" value=4 />
+            <label for="radHouseSmall">Small.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHouseApartment" name="housesize" value=2 />
+            <label for="radHouseApartment">an Apartment.</label>
+        </div>
+    </fieldset>
+
+    <!--
+        Here we place the field where we want to update the running total CF into a <span> with
+        its own ID so that we can reference it easily using document.getElementById("cfTotalField")
+        which you'll find in the displayTotalCF() function.
+    -->
+    <h2>Your Carbon Footprint value is:</h2>
+    <div style="font-size: 300%" id="cfTotalField">(answer the questions to find out!)</div>
 </body>
 </html>
