@@ -39,6 +39,13 @@ function displayTotalCF(){
 //  Then we call our displayTotalCF() function above.
 //
 function determineHouseholdPts(inputText){
+        console.log(typeof inputText);
+        // The input comes from a text field, so inputText is actually a string.
+        // We could still totally compare it as a string, but we'll parse it into
+        // an int for two reasons. First, we just want to keep our old code from
+        // earlier in the lesson, which uses strict-comparison (triple equals).
+        // Second, it is actually faster to compare integer values than it is to
+        // compare strings, so it's just a good general practice to get into.
     numberInHousehold = parseInt(inputText);
     if(numberInHousehold === 1){            // user lives alone
         cfHousehold = 14;
