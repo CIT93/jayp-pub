@@ -39,7 +39,6 @@ function displayTotalCF(){
 //  Then we call our displayTotalCF() function above.
 //
 function determineHouseholdPts(inputText){
-        console.log(typeof inputText);
         // The input comes from a text field, so inputText is actually a string.
         // We could still totally compare it as a string, but we'll parse it into
         // an int for two reasons. First, we just want to keep our old code from
