@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 4 - Carbon Footprint</title>
+    <script defer src="main.js"></script>
+</head>
+<body>
+    <h1>Let's calculate your Carbon Footprint!</h1>
+    <h2>(This is a work in progress. So far, we only check Household Size and Home Size.)</h2>
+
+    <fieldset>
+        <legend>Household Size:</legend>
+        <div>
+            <input type="text" id="textHouseholdSize" name="household" oninput="updateHouseholdPts(this.value)" />
+            <label for="textHouseholdSize">Type in how many people are in your household (including yourself)?</label>
+        </div>
+    </fieldset>
+
+    <fieldset oninput="updateHouseSizePts()">
+        <legend>The size of my house is:</legend>
+        <div>
+            <input type="radio" id="radHouseLarge" name="housesize" value=10 />
+            <label for="radHouseLarge">Large.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHouseMedium" name="housesize" value=7 />
+            <label for="radHouseMedium">Medium.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHouseSmall" name="housesize" value=4 />
+            <label for="radHouseSmall">Small.</label>
+        </div>
+        <div>
+            <input type="radio" id="radHouseApartment" name="housesize" value=2 />
+            <label for="radHouseApartment">an Apartment.</label>
+        </div>
+    </fieldset>
+
+    <h2>Your Carbon Footprint value is:</h2>
+    <div style="font-size: 300%" id="cfTotalField">(answer the questions to find out!)</div>
+</body>
+</html>
