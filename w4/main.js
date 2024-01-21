@@ -105,7 +105,32 @@ function start( householdMembers, houseSize ){
 }
 
 function displayOutput(){
-    ;
+    for(arr of cfpData){
+        console.log(arr);
+        const output = document.getElementById("output");
+
+        // create a new paragraph
+        //
+        // I don't know if there's a better way to enclose a bolded element within a
+        // paragraph element, but here's how to do it with what we know so far.
+        //
+        const newP = document.createElement("p");
+        const newB = document.createElement("b");
+        newB.textContent = `Carbon Footprint total is ${arr[4]}`;
+        newP.appendChild(newB);
+
+        // create a line item for household members beneath the paragraph
+        const newLIHouseholdMembers = document.createElement("li");
+        newLIHouseholdMembers.textContent = `${arr[2]} for having ${arr[0]} household members.`;
+        newP.appendChild(newLIHouseholdMembers);
+
+        // create a line item for house size beneath the paragraph
+        const newLIHouseSize = document.createElement("li");
+        newLIHouseSize.textContent = `${arr[3]} for having a ${arr[1]} home.`;
+        newP.appendChild(newLIHouseSize);
+
+        output.appendChild(newP);
+    }
 }
 
 start(5, "apartment");
