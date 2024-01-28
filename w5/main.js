@@ -103,7 +103,7 @@ function start( householdMembers, houseSize ){
 //----
 //  We now process cfpDataList as an array of objects instead of an array of arrays.
 //
-function displayOutput(cfpData){
+function displayOutput(){
     const output = document.getElementById("output");
 
     for(data of cfpDataList){
