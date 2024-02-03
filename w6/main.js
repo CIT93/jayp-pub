@@ -23,7 +23,6 @@ function determineHouseholdPts(inputText){
     return 0;
 }
 
-
 function determineHouseSizePts(val = null){
     if(val){
         if(val === "large"){
@@ -39,9 +38,12 @@ function determineHouseSizePts(val = null){
     return 0;   // invalid size, return zero
 }
 
-
-function start( householdMembers, houseSize ){
+// add a record to the data list
+// TODO: we should probably stop calling this function start()
+function start( firstname, lastname, householdMembers, houseSize ){
     const cfpData = {
+        firstName:          firstname,
+        lastName:           lastname,
         householdMembers:   householdMembers,
         houseSize:          houseSize,
         houseHoldPts:       determineHouseholdPts(householdMembers),
@@ -67,7 +69,7 @@ function start( householdMembers, houseSize ){
     cfpDataList.push(cfpData);  // push the object to the array
 }
 
-
+// generate a report of the entire data list
 function displayOutput(){
     for(data of cfpDataList){
         // create a new paragraph
@@ -77,7 +79,7 @@ function displayOutput(){
         //
         const newP = document.createElement("p");
         const newB = document.createElement("b");
-        newB.textContent = `Carbon Footprint total is ${data.total}`;
+        newB.textContent = `Carbon Footprint total for ${data.firstName} ${data.lastName}: ${data.total}`;
         newP.appendChild(newB);
 
         // create a line item for household members beneath the paragraph
@@ -101,7 +103,7 @@ FORM.addEventListener("submit", function(e){
     const houseMembers = parseInt(FORM.housemembers.value);
     const houseSize = FORM.housesize.value;
 
-    start(houseMembers, houseSize);
+    start(firstName, lastName, houseMembers, houseSize);
     OUTPUT.innerHTML = "";
     displayOutput();
     FORM.reset();
