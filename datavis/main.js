@@ -2,7 +2,7 @@
 // the global namespace.
 const dataVis = {
     txtDataHeader:      `COVID-19 Deaths by Country, Top 18`,
-    txtDataSource:      `Our World in Data, updated Feb. 3, 2024`,
+    txtDataSource:      `Source: Our World in Data, updated Feb. 3, 2024`,
     txtCovidDeaths:     `
         United States, 1165780
         Brazil, 702116
