@@ -25,7 +25,7 @@ const dataVis = {
         `,
 };
 
-// Level 1 Exercise: Above, dataVis.txtCovidDeaths is just a copy-pasted string of data.
+// Level 2 Exercise: Above, dataVis.txtCovidDeaths is just a copy-pasted string of data.
 // Convert it programmatically into an array of arrays that looks like:
 //
 //  arrCovidDeaths = [
