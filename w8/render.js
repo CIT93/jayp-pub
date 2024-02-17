@@ -87,10 +87,13 @@ function renderTbl(data){
     while(TBL.firstChild){
         TBL.removeChild(TBL.lastChild);     // remove from end, probably more efficient
     }
-    const table = document.createElement("table");
-    table.appendChild(makeTblHead());   // add the heading to the table
-    table.appendChild(makeTblBody(data));   // add the data to the table
-    TBL.appendChild(table);
+    // render the table only if there is any data to render
+    if(data.length){
+        const table = document.createElement("table");
+        table.appendChild(makeTblHead());   // add the heading to the table
+        table.appendChild(makeTblBody(data));   // add the data to the table
+        TBL.appendChild(table);
+    }
 }
 
 export {renderTbl}
