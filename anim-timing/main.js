@@ -13,9 +13,8 @@ const anim = {
     maxBallSpeed:       250,
     avoidBorder:        0.10,       // min distance from border to spawn
 
-    frameRate:          30,         // default wanted framerate
+    frameRate:          undefined,  // default wanted framerate
     timeSync:           undefined,  // track time between frames, for sync'ing
-    defaultNumBalls:    10,         // default number of balls at start
     Ball:               [],         // the ball objects to draw
 
     // On some browsers, the window innerWidth and innerHeight are still large
@@ -37,9 +36,13 @@ function initialize(){
     // add a thin border just to see exactly where our canvas is
     anim.CTX.canvas.style = "border: 1px solid;";
 
-    for(let n = 0; n < anim.defaultNumBalls; ++n){
+    // set initial number of balls from control default value
+    let numBalls = document.getElementById("num-balls-ctrl").value;
+    for(let n = 0; n < numBalls; ++n){
         anim.Ball.push(makeBall());
     }
+    // set initial framerate from control default value
+    anim.frameRate = document.getElementById("fps-ctrl").value;
 
     // store the initial timestamp before the first animation frame
     anim.timeSync = performance.now();
@@ -73,7 +76,32 @@ function update(){
     window.requestAnimationFrame(function(){ update(); });
 }
 
-initialize();
+
+//-------- Event Handlers
+
+// slider control for number of balls
+document.getElementById("num-balls-ctrl").addEventListener("input",(e)=>{
+    const numBalls = e.target.value;
+    let currentBalls = anim.Ball.length;
+    document.getElementById("num-balls").textContent = numBalls;
+    while(numBalls > currentBalls){
+        anim.Ball.push(makeBall());
+        ++currentBalls;
+    }
+    while(numBalls < currentBalls){
+        anim.Ball.pop();
+        --currentBalls;
+    }
+});
+
+// slider control for framerate
+document.getElementById("fps-ctrl").addEventListener("input",(e)=>{
+    const fps = e.target.value;
+    document.getElementById("fps").textContent = fps;
+    anim.frameRate = fps;
+});
+
+//-------- Utility Functions
 
 // create a ball with random properties based upon config
 function makeBall(){
@@ -89,3 +117,5 @@ function makeBall(){
     }
     return new Ball(bx, by, anim.ballSize, dx, dy, anim.canvasX, anim.canvasY);
 }
+
+initialize();

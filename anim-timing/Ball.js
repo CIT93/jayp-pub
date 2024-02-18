@@ -60,7 +60,7 @@ class Ball {
     draw(ctx, color){
         ctx.beginPath();
         ctx.fillStyle = color;
-        ctx.ellipse(this.#loc.x, this.#loc.y, this.#radius, this.#radius, 0, 0, Math.PI*2);
+        ctx.arc(this.#loc.x, this.#loc.y, this.#radius, 0, Math.PI*2);
         ctx.fill();
     }
 }
