@@ -1,3 +1,4 @@
+// set up our canvas and context objects
 let CANVAS = document.getElementById("anim-canvas");
 let CTX = CANVAS.getContext("2d");
 let CANVAS_SIZE_OFFSET = 24;
@@ -14,6 +15,7 @@ const frameRate = 30;
 // timestamp for animation frame timing
 let prevFrameTime;
 
+// code that we call only once, usually to set things up
 function initialize(){
     // set the adjusted canvas size
     CTX.canvas.width = window.innerWidth - CANVAS_SIZE_OFFSET;
@@ -27,9 +29,13 @@ function initialize(){
     window.requestAnimationFrame( update );
 }
 
+// code that we call for every animation frame
 function update(){
     const pNow = performance.now();     // get the timestamp for *this* frame
     const deltaTime = pNow - prevFrameTime;    // find ms since last frame
+    // we divide by 1000 here because deltaTime is in milliseconds, but the
+    // framerate we want is in seconds; we get the reciprocal because we
+    // have our framerate in frames/sec but want to get seconds/frame
     if(deltaTime/1000 >= 1/frameRate){
         // clear the canvas from the last frame
         // (or the old ball will still be visible at the old location)
