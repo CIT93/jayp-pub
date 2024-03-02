@@ -76,3 +76,8 @@ Of course, this object *might* be a stringified version, but if so then I
 wonder why the Inspector doesn't just display this stringified version instead
 of literally '[object Object]'.
 
+## Update:
+
+After some testing, I found the answer to the above. The localStorage data
+is *actually* the string literal '[object Object]' if a non-stringified object
+is attempted to be stored. The original data can no longer be retrieved.

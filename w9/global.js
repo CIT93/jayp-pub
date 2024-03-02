@@ -1,5 +1,11 @@
 const FORM = document.getElementById("form");
 const TBL = document.getElementById("tab-data");
-const cfpDataList = [];
+let cfpDataList = [];
 
-export { FORM, TBL, cfpDataList };
+// apparently, variables import from modules are always forced to be constant
+// so we need a kind of "module setter"
+function setCFPData(data){
+    cfpDataList = data;
+}
+
+export { FORM, TBL, cfpDataList, setCFPData };

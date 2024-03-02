@@ -1,6 +1,7 @@
 import { renderTbl } from "./render.js";
 import { determineHouseSizePts, determineHouseholdPts } from "./footprint.js";
-import { FORM, cfpDataList } from "./global.js";
+import { FORM, cfpDataList, setCFPData } from "./global.js";
+import { localSave, localLoad } from "./storage.js";
 
 const FIRSTNAME = document.getElementById("firstname");
 const LASTNAME = document.getElementById("lastname");
@@ -60,7 +61,8 @@ FORM.addEventListener("submit", function(e){
     // final check for valid field inputs
     if(validateFieldInput(FIRSTNAME) && validateFieldInput(LASTNAME) && validateFieldInput(HOUSEMEMBERS)){
         addCFRecord(firstName, lastName, houseMembers, houseSize);
-        renderTbl(cfpDataList);
+        localSave("cfp", cfpDataList);      // save to local storage
+        renderTbl(cfpDataList);             // render to page
         FORM.reset();
     }
 });
