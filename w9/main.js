@@ -44,7 +44,7 @@ function validateFieldInput(field){
     return true;
 }
 
-// on firstname or lastname focus loss
+// on field focus loss
 FIRSTNAME.addEventListener("blur", (e) => validateFieldInput(e.target));
 LASTNAME.addEventListener("blur", (e) => validateFieldInput(e.target));
 HOUSEMEMBERS.addEventListener("blur", (e) => validateFieldInput(e.target));
