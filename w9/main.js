@@ -45,6 +45,12 @@ function validateFieldInput(field){
     return true;
 }
 
+// load any data saved to local storage
+setCFPData(localLoad("cfp"));
+if(cfpDataList.length){     // render if stored data present
+    renderTbl(cfpDataList);
+}
+
 // on field focus loss
 FIRSTNAME.addEventListener("blur", (e) => validateFieldInput(e.target));
 LASTNAME.addEventListener("blur", (e) => validateFieldInput(e.target));

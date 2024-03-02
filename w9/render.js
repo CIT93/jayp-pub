@@ -1,4 +1,5 @@
 import { TBL } from "./global.js";
+import { localSave } from "./storage.js";
 
 // create the structure for the table heading and return it
 function makeTblHead(){
@@ -42,8 +43,9 @@ function makeTblField(data){
 
 // delete a record by index
 function deleteRecord(data, idx){
-    data.splice(idx, 1);    // remove the record at idx
-    renderTbl(data);        // re-render the table
+    data.splice(idx, 1);        // remove the record at idx
+    localSave("cfp", data);     // save changed table to local storage
+    renderTbl(data);            // re-render the table
 }
 
 // create action button elements in a field (td) and return it
