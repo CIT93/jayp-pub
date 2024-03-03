@@ -8,7 +8,7 @@ let cfpDataList = [];
 
 // apparently, variables import from modules are always forced to be constant
 // so we need a kind of "module setter"
-const setCFPData = function(data){
+const setCFPData = (data) => {
     cfpDataList = data;
 }
 

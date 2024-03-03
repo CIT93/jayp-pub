@@ -2,12 +2,12 @@ import { TBL } from "./global.js";
 import { localSave } from "./storage.js";
 
 // create the structure for the table heading and return it
-const makeTblHead = function(){
+const makeTblHead = () => {
     const thead = document.createElement("thead");
     const tr = document.createElement("tr");
     const headingTextArr = ["Name", "Household", "HouseSize", "Footprint", "Actions"];
 
-    headingTextArr.forEach(function(text){
+    headingTextArr.forEach((text) => {
         const th = document.createElement("th");
         th.textContent = text;
         tr.appendChild(th);
@@ -17,7 +17,7 @@ const makeTblHead = function(){
 }
 
 // create a table row (tr) with the given data and return it
-const makeTblRow = function(data, record, idx){
+const makeTblRow = (data, record, idx) => {
     const tr = document.createElement("tr");
     for(const [key, value] of Object.entries(record)){
         // render only fields we want
@@ -35,21 +35,21 @@ const makeTblRow = function(data, record, idx){
 }
 
 // create a table field (td) with the given data and return it
-const makeTblField = function(data){
+const makeTblField = (data) => {
     const td = document.createElement("td");
     td.textContent = data;
     return td;
 }
 
 // delete a record by index
-const deleteRecord = function(data, idx){
+const deleteRecord = (data, idx) => {
     data.splice(idx, 1);        // remove the record at idx
-    localSave("cfp", data);     // save changed table to local storage
+    localSave(data, "cfp");     // save changed table to local storage
     renderTbl(data);            // re-render the table
 }
 
 // create action button elements in a field (td) and return it
-const makeActionButtons = function(data, record, idx){
+const makeActionButtons = (data, record, idx) => {
     const td = document.createElement("td");
     const btnEdit = document.createElement("button");
     btnEdit.textContent = "Edit";
@@ -58,10 +58,10 @@ const makeActionButtons = function(data, record, idx){
     btnDel.textContent = "Del";
     td.appendChild(btnDel);
 
-    btnDel.addEventListener("click", function(e){
+    btnDel.addEventListener("click", (e) => {
         deleteRecord(data, idx);
     });
-    btnEdit.addEventListener("click", function(e){
+    btnEdit.addEventListener("click", (e) => {
         // repopulate the original form's fields
         document.getElementById("firstname").value = record.firstName;
         document.getElementById("lastname").value = record.lastName;
@@ -75,16 +75,16 @@ const makeActionButtons = function(data, record, idx){
 }
 
 // create the structure for the table body and return it
-const makeTblBody = function(data){
+const makeTblBody = (data) => {
     const tbody = document.createElement("tbody");
-    data.forEach(function(record, idx){
+    data.forEach((record, idx) => {
         tbody.appendChild(makeTblRow(data, record, idx));      // make a row for each record
     });
     return tbody;
 }
 
 // render the entire table using the given data
-const renderTbl = function(data){
+const renderTbl = (data) => {
     // clear the table from any previous reports
     while(TBL.firstChild){
         TBL.removeChild(TBL.lastChild);     // remove from end, probably more efficient

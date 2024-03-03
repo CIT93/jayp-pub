@@ -1,4 +1,4 @@
-const determineHouseholdPts = function(inputText){
+const determineHouseholdPts = (inputText) => {
     const numberInHousehold = parseInt(inputText);
     if(numberInHousehold === 1){            // user lives alone
         return 14;
@@ -19,7 +19,7 @@ const determineHouseholdPts = function(inputText){
     return 0;
 }
 
-const determineHouseSizePts = function(val = null){
+const determineHouseSizePts = (val = null) => {
     if(val){
         if(val === "large"){
             return 10;

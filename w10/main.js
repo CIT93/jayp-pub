@@ -5,7 +5,7 @@ import { localSave, localLoad } from "./storage.js";
 import { validateFieldInput } from "./validate.js";
 
 // add a record to the data list
-const addCFRecord = function( firstname, lastname, householdMembers, houseSize ){
+const addCFRecord = ( firstname, lastname, householdMembers, houseSize ) => {
     const cfpData = {
         firstName:          firstname,
         lastName:           lastname,
@@ -45,9 +45,9 @@ FORM.addEventListener("submit", function(e){
     const houseSize = HSIZE.value;
 
     // final check for valid field inputs
-    if(validateFieldInput(FNAME) && validateFieldInput(LNAME) && validateFieldInput(HMEMBERS)){
+    if(validateFieldInput(FNAME, LNAME, HMEMBERS, HSIZE)){
         addCFRecord(firstName, lastName, houseMembers, houseSize);
-        localSave("cfp", cfpDataList);      // save to local storage
+        localSave(cfpDataList, "cfp");      // save to local storage
         renderTbl(cfpDataList);             // render to page
         FORM.reset();
     }
