@@ -24,6 +24,7 @@ const anim = {
     CONTROLS_SPACE:         120,     // extra space at bottom to fit controls
 };
 
+// our standard initialize() function, called only once at page load
 function initialize(){
     // get our canvas and a 2d context for drawing
     anim.CANVAS = document.getElementById("anim-canvas");
@@ -51,8 +52,8 @@ function initialize(){
 }
 
 // The update() function is called at every animation frame, i.e. before the
-// next "repaint". It is called for the first time in the initialize()
-// function, and then from itself for subsequent frames.
+// next "redraw". It is called for the first time in the initialize()
+// function, and then it is called from itself for subsequent frames.
 function update(){
     // We want to check the amount of time since the last frame, and do
     // something only if enough time has passed based upon the framerate
@@ -105,17 +106,22 @@ document.getElementById("fps-ctrl").addEventListener("input",(e)=>{
 
 // create a ball with random properties based upon config
 function makeBall(){
+    // pick a random point (bx, by) in the canvas that is at least avoidBorder
+    // percent away from the borders
     const bx = Math.random() * anim.canvasX * (1 - 2*anim.avoidBorder) + anim.canvasX * anim.avoidBorder;
     const by = Math.random() * anim.canvasY * (1 - 2*anim.avoidBorder) + anim.canvasY * anim.avoidBorder;
+    // choose a vector (dx, dy) that is the direction and speed the ball is
+    // travelling, and give each a 50% chance to be negative
     let dx = Math.random() * (anim.maxBallSpeed - anim.minBallSpeed) + anim.minBallSpeed;
+    let dy = Math.random() * (anim.maxBallSpeed - anim.minBallSpeed) + anim.minBallSpeed;
     if(Math.random()<0.5){      // allow for left or right initial movement
         dx *= -1;
     }
-    let dy = Math.random() * (anim.maxBallSpeed - anim.minBallSpeed) + anim.minBallSpeed;
     if(Math.random()<0.5){      // allow for up or down initial movement
         dy *= -1;
     }
     return new Ball(bx, by, anim.ballSize, dx, dy, anim.canvasX, anim.canvasY);
 }
 
+// start it all up!
 initialize();
