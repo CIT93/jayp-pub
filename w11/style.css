@@ -1,0 +1,36 @@
+html {
+    font-size: 22px;
+}
+body {
+    background-color: darkslategray;
+    color: whitesmoke;
+}
+#input_form{
+    text-align: right;
+}
+input:in-range {
+    background-color: lightgreen;
+}
+input:out-of-range {
+    background-color: lightcoral;
+}
+table {
+    border: 1px solid;
+}
+th, td {
+    border: 1px solid;
+    padding: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+tbody tr:nth-child(odd) {
+    background-color: olive;
+}
+#error_message {
+    text-align: center;
+    background-color: darkred;
+}
+input.invalid {
+    outline: 2px solid red;
+    border-radius: 4px;
+}
