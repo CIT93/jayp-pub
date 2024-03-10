@@ -5,13 +5,17 @@
 // Forced update. Already added 2nd method in previous commit.
 
 class Footprint {
-    constructor(first, last, members, size) {
-        this.firstName = first;
+    constructor(first, last, members, size, fchoice, ftype) {
+        this.firstName = first;         // store initial values to class
         this.lastName = last;
         this.householdMembers = members;
         this.houseSize = size;
-        this.determineHouseholdPts();
+        this.foodChoice = fchoice;
+        this.foodType = ftype;
+        this.determineHouseholdPts();   // determine calculated values
         this.determineHouseSizePts();
+        this.determineFoodChoicePts();
+        this.determineFoodTypePts();
         this.calcFPTotal();
     }
 
@@ -60,49 +64,42 @@ class Footprint {
         }
     }
 
+    // determine points for food choices
+    determineFoodChoicePts() {
+        if(this.foodChoice === "domestic-meat-daily"){
+            this.foodChoicePts = 10;
+        }else if(this.foodChoice === "domestic-meat-weekly"){
+            this.foodChoicePts = 8;
+        }else if(this.foodChoice === "vegetarian"){
+            this.foodChoicePts = 4;
+        }else if(this.foodChoice === "vegan"){
+            this.foodChoicePts = 2;
+        }else{
+            // invalid input, but we set a value anyway to avoid any errors
+            // when attempting to use the value
+            this.foodChoicePts = 0;
+        }
+    }
+
+    // determine points for food type
+    determineFoodTypePts() {
+        if(this.foodType === "prepackaged"){
+            this.foodTypePts = 12;
+        }else if(this.foodType === "balanced"){
+            this.foodTypePts = 6;
+        }else if(this.foodType === "fresh"){
+            this.foodTypePts = 2;
+        }else{
+            // invalid input, but we set a value anyway to avoid any errors
+            // when attempting to use the value
+            this.foodTypePts = 0;
+        }
+    }
+
     // calculate the total footprint
     calcFPTotal() {
-        this.total = this.houseHoldPts + this.houseSizePts;
+        this.total = this.houseHoldPts + this.houseSizePts + this.foodChoicePts + this.foodTypePts;
     }
 };
 
-// retaining the old functions and exports, since the assignment didn't say
-// we could switch to using the class methods yet
-
-const determineHouseholdPts = (inputText) => {
-    const numberInHousehold = parseInt(inputText);
-    if(numberInHousehold === 1){            // user lives alone
-        return 14;
-    } else if(numberInHousehold === 2){     // user lives with 1 other person
-        return 12;
-    } else if(numberInHousehold === 3){     // user lives with 2 other people
-        return 10;
-    } else if(numberInHousehold === 4){     // user lives with 3 other people
-        return 8;
-    } else if(numberInHousehold === 5){     // user lives with 4 other people
-        return 6;
-    } else if(numberInHousehold === 6){     // user lives with 5 other people
-        return 4;
-    } else if(numberInHousehold > 6){       // user lives with more thawn 5 other people
-        return 2;
-    }
-    console.log(`Invalid number of people in household given: ${inputText}`);
-    return 0;
-}
-
-const determineHouseSizePts = (val = null) => {
-    if(val){
-        if(val === "large"){
-            return 10;
-        }else if(val === "medium"){
-            return 7;
-        }else if(val === "small"){
-            return 4;
-        }else if(val === "apartment"){
-            return 2;
-        }
-    }
-    return 0;   // invalid size, return zero
-}
-
-export { Footprint, determineHouseSizePts, determineHouseholdPts };
+export { Footprint };

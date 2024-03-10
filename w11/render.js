@@ -1,11 +1,11 @@
-import { TBL } from "./global.js";
+import { TBL, FNAME, LNAME, HMEMBERS, HSIZE, FCHOICE, FTYPE } from "./global.js";
 import { localSave } from "./storage.js";
 
 // create the structure for the table heading and return it
 const makeTblHead = () => {
     const thead = document.createElement("thead");
     const tr = document.createElement("tr");
-    const headingTextArr = ["Name", "Household", "HouseSize", "Footprint", "Actions"];
+    const headingTextArr = ["Name", "Household", "House Size", "Food Choice", "Food Type", "Footprint", "Actions"];
 
     headingTextArr.forEach((text) => {
         const th = document.createElement("th");
@@ -16,13 +16,6 @@ const makeTblHead = () => {
     return thead;
 }
 
-// Actually... no changes needed, haha! Because the original code used object
-// notation to access the fields, and because I did not change the names of
-// the fields when converting it into a class/object, the exact same syntax
-// still works just fine.
-
-// Tested and appears fully functional.
-
 // create a table row (tr) with the given data and return it
 const makeTblRow = (data, record, idx) => {
     const tr = document.createElement("tr");
@@ -32,6 +25,8 @@ const makeTblRow = (data, record, idx) => {
             case "firstName":
             case "householdMembers":
             case "houseSize":
+            case "foodChoice":
+            case "foodType":
             case "total":
                 tr.appendChild(makeTblField(value));    // make a cell for each wanted field
                 break;
@@ -70,14 +65,15 @@ const makeActionButtons = (data, record, idx) => {
     });
     btnEdit.addEventListener("click", (e) => {
         // repopulate the original form's fields
-        document.getElementById("firstname").value = record.firstName;
-        document.getElementById("lastname").value = record.lastName;
-        document.getElementById("housemembers").value = record.householdMembers;
-        document.getElementById("housesize").value = record.houseSize;
+        FNAME.value = record.firstName;
+        LNAME.value = record.lastName;
+        HMEMBERS.value = record.householdMembers;
+        HSIZE.value = record.houseSize;
+        FCHOICE.value = record.foodChoice;
+        FTYPE.value = record.foodType;
         // delete the old record
         deleteRecord(data, idx);
     });
-
     return td;
 }
 
