@@ -20,19 +20,36 @@ form {
 
 button {
     background-color: lightblue;
-    border: 1px solid;
+    border: 2px solid black;
     color: navy;
     padding: 15px 32px;
     text-align: center;
-    text-decoration: none;
     font-size: 24px;
     border-radius: 8px;
+}
+button:hover {
+    border: 2px solid red;
+    background-color: aqua;
+}
+button:disabled {
+    background-color: gray;
+    color: darkslategray;
 }
 
 #output {
     color: lime;
+    font-size: 28px;
+}
+
+#error {
+    background-color: maroon;
 }
 
 .highlight {
     color: cyan;
+}
+
+.invalid {
+    outline: 4px solid red;
+    border-radius: 4px;
 }

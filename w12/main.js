@@ -1,4 +1,7 @@
 import { config, elem } from "./globals.js";
+import { validateFields } from "./validate.js";
+
+//---- functions
 
 // kick things off by displaying the countdown for the first set
 const performSets = (setNum, targetNum, minutes, rest, exercise) => {
@@ -93,16 +96,36 @@ const displaySetTimerVal = (elem, eMin, eSec, tMin, tSec, endCallback, tp) => {
     }
 }
 
+// set is complete, check if we need to do more and start next one
 const setComplete = (elem, tp) => {
     if(tp.setNum < tp.targetNum){     // we still have more sets to perform
         performSets(tp.setNum + 1, tp.targetNum, tp.minutes, tp.rest, tp.exercise);
     }else{
         elem.textContent = "Exercises complete, well done!";
+        elem.SUBMIT.disabled = false;   // re-enable submit button to allow another run
     }
 }
 
-// test values, short so testing isn't too lengthy
-elem.SETS.value = 3;
-elem.TIME.value = 0.25;
-elem.REST.value = 5;
-performSets(1, elem.SETS.value, elem.TIME.value, elem.REST.value, "Push-Ups");
+//---- start of primary code
+
+// initialize fields to defaults
+elem.SETS.value = config.default_sets;
+elem.TIME.value = config.default_time;
+elem.REST.value = config.default_countdown;
+
+//---- event listeners
+
+// submit button
+elem.FORM.addEventListener("submit", function(e){
+    e.preventDefault();     // prevent old-school HTML form submission
+    if(validateFields(elem.ERROR, elem.EXERCISE, elem.SETS, elem.TIME, elem.REST)){
+        // we disbale the Submit button while running an exercise, otherwise
+        // we can end up with multiple concurrent exercise processes all
+        // trying to run at the same time
+        elem.SUBMIT.disabled = true;
+        elem.SUBMIT.textContent = "Running...";
+        // perform the first set
+        const exerName = elem.EXERCISE.options[elem.EXERCISE.selectedIndex].text;
+        performSets(1, elem.SETS.value, elem.TIME.value, elem.REST.value, exerName);
+    }
+});

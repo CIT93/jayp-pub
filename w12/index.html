@@ -14,7 +14,7 @@
                 <legend>Exercise Timer</legend>
                 <div>
                     <label for="exercise">Exercise:</label>
-                    <select id="exercise" name="exercise" required>
+                    <select id="exercise" name="exercise">
                         <option value="">---- Please select an exercise ----</option>
                         <option value="pushups">Push-Ups</option>
                         <option value="pullups">Pull-Ups</option>
@@ -24,20 +24,23 @@
                 </div>
                 <div>
                     <label for="sets">Number of Sets:</label>
-                    <input type="number" id="sets" name="sets" min="1" required />
+                    <input type="number" id="sets" name="sets" min="1" />
                 </div>
                 <div>
                     <label for="time">Time per Set (minutes):</label>
-                    <input type="number" id="time" name="time" min="0.25" step="0.25" required />
+                    <input type="number" id="time" name="time" min="0.25" step="0.25" />
                 </div>
                 <div>
                     <label for="rest">Rest time between sets (seconds):</label>
-                    <input type="number" id="rest" name="rest" min="5" step="5" required />
+                    <input type="number" id="rest" name="rest" min="5" step="5" />
                 </div>
                 <hr />
                 <div>
-                    <button type="submit">Start Exercise</button>
+                    <button type="submit" id="submit">Start Exercise</button>
                 </div>
+            </fieldset>
+            <fieldset>
+                <div id="error"></div>
             </fieldset>
         </form>
     </div>
