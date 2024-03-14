@@ -1,17 +1,29 @@
-import { config, OUTPUT } from "./globals.js";
+import { config, elem } from "./globals.js";
 
 // kick things off by displaying the countdown for the first set
-const performSets = (setNum, targetNum, minutes, exercise) => {
-    displayCountdown(OUTPUT, config.countdown_time, setNum, targetNum, minutes, exercise);
+const performSets = (setNum, targetNum, minutes, rest, exercise) => {
+    // We define a simple object for storing parameters for our "cascade" of
+    // setTimeout() calls so that we don't have to pass each value as a
+    // separate argument down the chain, and also so we don't pollute the
+    // global name space.
+    const timeout_parms = {
+        setNum:     setNum,
+        targetNum:  targetNum,
+        minutes:    minutes,
+        rest:       rest,
+        exercise:   exercise,
+    }
+
+    displayCountdown(elem.OUTPUT, timeout_parms);
 }
 
 // display a countdown timer at the given element for the specified number
 // of seconds, then call the endCallback function
-const displayCountdown = (elem, seconds, setNum, targetNum, minutes, exercise) => {
+const displayCountdown = (elem, tp) => {
     // create the countdown text
     const spExercise = document.createElement("span");  // span for the exercise name
     spExercise.classList.add("highlight");
-    spExercise.textContent = exercise;
+    spExercise.textContent = tp.exercise;
     const spCountdown = document.createElement("span"); // span for the countdown
     elem.textContent = "Get ready to begin your next set of ";
     elem.appendChild(spExercise);
@@ -19,31 +31,31 @@ const displayCountdown = (elem, seconds, setNum, targetNum, minutes, exercise) =
     elem.appendChild(spCountdown);
     spCountdown.after(" seconds...");
     // perform the countdown
-    displayCountdownVal(elem, spCountdown, seconds, displaySetTimer, setNum, targetNum, minutes, exercise);
+    displayCountdownVal(elem, spCountdown, tp.rest, displaySetTimer, tp);
 }
 
 // update the value of a countdown timer (seconds only)
-const displayCountdownVal = (elem, span, seconds, endCallback, setNum, targetNum, minutes, exercise) => {
+const displayCountdownVal = (elem, span, seconds, endCallback, tp) => {
     span.textContent = seconds;
     if(seconds > 0){    // still have more time to wait
         setTimeout(() => {
-            displayCountdownVal(elem, span, seconds - 1, endCallback, setNum, targetNum, minutes, exercise);
+            displayCountdownVal(elem, span, seconds - 1, endCallback, tp);
         }, 1000);
     } else {            // time's up
-        endCallback(elem, setNum, targetNum, minutes, exercise);
+        endCallback(elem, tp);
     }
 }
 
 // display and update the set timer for the current set
-const displaySetTimer = (elem, setNum, targetNum, minutes, exercise) => {
-    let timerMinutes = Math.floor(minutes);
-    let timerSeconds = (minutes - timerMinutes) * 60;
+const displaySetTimer = (elem, tp) => {
+    let timerMinutes = Math.floor(tp.minutes);
+    let timerSeconds = (tp.minutes - timerMinutes) * 60;
 
     // create the timer text
     const divExercise = document.createElement("div");
     const spExercise = document.createElement("span");  // span for the exercise name
     spExercise.classList.add("highlight");
-    spExercise.textContent = exercise;
+    spExercise.textContent = tp.exercise;
     const spTimerMinutes = document.createElement("span");  // span for the timer values
     const spTimerSeconds = document.createElement("span");
     divExercise.textContent = "Let's do some ";
@@ -52,18 +64,18 @@ const displaySetTimer = (elem, setNum, targetNum, minutes, exercise) => {
     elem.textContent = "";
     elem.appendChild(divExercise);
     const divTimer = document.createElement("div");
-    divTimer.textContent = `Set #${setNum} of ${targetNum} -- Time remaining: `;
+    divTimer.textContent = `Set #${tp.setNum} of ${tp.targetNum} -- Time remaining: `;
     divTimer.appendChild(spTimerMinutes);
     spTimerMinutes.after(" min ");
     divTimer.appendChild(spTimerSeconds);
     spTimerSeconds.after(" sec");
     elem.appendChild(divTimer);
     // perform the countdown
-    displaySetTimerVal(elem, spTimerMinutes, spTimerSeconds, timerMinutes, timerSeconds, setComplete, setNum, targetNum, minutes, exercise);
+    displaySetTimerVal(elem, spTimerMinutes, spTimerSeconds, timerMinutes, timerSeconds, setComplete, tp);
 }
 
 // update the values of the set timer, minutes and seconds
-const displaySetTimerVal = (elem, eMin, eSec, tMin, tSec, endCallback, setNum, targetNum, minutes, exercise) => {
+const displaySetTimerVal = (elem, eMin, eSec, tMin, tSec, endCallback, tp) => {
     eMin.textContent = tMin;
     eSec.textContent = tSec;
     if(tMin > 0 || tSec > 0){    // still have more time to wait
@@ -74,19 +86,23 @@ const displaySetTimerVal = (elem, eMin, eSec, tMin, tSec, endCallback, setNum, t
             }else{
                 --tSec;
             }
-            displaySetTimerVal(elem, eMin, eSec, tMin, tSec, endCallback, setNum, targetNum, minutes, exercise);
+            displaySetTimerVal(elem, eMin, eSec, tMin, tSec, endCallback, tp);
         }, 1000);
     } else {            // time's up
-        endCallback(elem, setNum, targetNum, minutes, exercise);
+        endCallback(elem, tp);
     }
 }
 
-const setComplete = (elem, setNum, targetNum, minutes, exercise) => {
-    if(setNum < targetNum){     // we still have more sets to perform
-        performSets(setNum + 1, targetNum, minutes, exercise);
+const setComplete = (elem, tp) => {
+    if(tp.setNum < tp.targetNum){     // we still have more sets to perform
+        performSets(tp.setNum + 1, tp.targetNum, tp.minutes, tp.rest, tp.exercise);
     }else{
         elem.textContent = "Exercises complete, well done!";
     }
 }
 
-performSets(1, 2, 0.25, "Push-Ups");
+// test values, short so testing isn't too lengthy
+elem.SETS.value = 3;
+elem.TIME.value = 0.25;
+elem.REST.value = 5;
+performSets(1, elem.SETS.value, elem.TIME.value, elem.REST.value, "Push-Ups");
