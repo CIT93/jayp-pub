@@ -97,12 +97,13 @@ const displaySetTimerVal = (elem, eMin, eSec, tMin, tSec, endCallback, tp) => {
 }
 
 // set is complete, check if we need to do more and start next one
-const setComplete = (elem, tp) => {
+const setComplete = (e, tp) => {
     if(tp.setNum < tp.targetNum){     // we still have more sets to perform
         performSets(tp.setNum + 1, tp.targetNum, tp.minutes, tp.rest, tp.exercise);
     }else{
-        elem.textContent = "Exercises complete, well done!";
+        e.textContent = "Exercises complete, well done!";
         elem.SUBMIT.disabled = false;   // re-enable submit button to allow another run
+        elem.SUBMIT.textContent = "Start Another";
     }
 }
 
