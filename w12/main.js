@@ -3,18 +3,18 @@ import { validateFields } from "./validate.js";
 
 //---- functions
 
-// kick things off by displaying the countdown for the first set
+// perform a single set defined by setNum
 const performSets = (setNum, targetNum, minutes, rest, exercise) => {
     // We define a simple object for storing parameters for our "cascade" of
     // setTimeout() calls so that we don't have to pass each value as a
     // separate argument down the chain, and also so we don't pollute the
     // global name space.
     const timeout_parms = {
-        setNum:     setNum,
-        targetNum:  targetNum,
-        minutes:    minutes,
-        rest:       rest,
-        exercise:   exercise,
+        setNum:     setNum,         // current set number
+        targetNum:  targetNum,      // request total sets to perform
+        minutes:    minutes,        // minutes per set
+        rest:       rest,           // seconds rest time between sets
+        exercise:   exercise,       // name of exercise
     }
 
     displayCountdown(elem.OUTPUT, timeout_parms);
@@ -124,7 +124,7 @@ elem.FORM.addEventListener("submit", function(e){
         // trying to run at the same time
         elem.SUBMIT.disabled = true;
         elem.SUBMIT.textContent = "Running...";
-        // perform the first set
+        // kick things off by displaying the countdown for the first set
         const exerName = elem.EXERCISE.options[elem.EXERCISE.selectedIndex].text;
         performSets(1, elem.SETS.value, elem.TIME.value, elem.REST.value, exerName);
     }
