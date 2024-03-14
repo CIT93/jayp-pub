@@ -1,0 +1,38 @@
+html {
+    font-size: 24px;
+}
+
+body {
+    background-color: darkslategray;
+    color: whitesmoke;
+}
+
+legend {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+form {
+    display: grid;
+    grid-template-columns: max-content;
+    text-align: right;
+}
+
+button {
+    background-color: lightblue;
+    border: 1px solid;
+    color: navy;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 24px;
+    border-radius: 8px;
+}
+
+#output {
+    color: lime;
+}
+
+.highlight {
+    color: cyan;
+}
