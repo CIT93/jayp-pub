@@ -15,8 +15,8 @@ const performSets = (setNum, targetNum, minutes, rest, exercise) => {
         minutes:        minutes,        // minutes per set
         rest:           rest,           // seconds rest time between sets
         exercise:       exercise,       // name of exercise
-        // working variables for timers
         setNum:         setNum,         // current set number
+        // working variables for timers
         curMin:         undefined,      // current minutes in set
         curSec:         undefined,      // current seconds in set
         restSec:        undefined,      // current resting time
@@ -44,19 +44,19 @@ const displayCountdown = (tp) => {
     // set working variables
     tp.restSec = tp.rest;
     // perform the countdown
-    displayCountdownVal(displaySetTimer, tp);
+    displayCountdownVal(tp);
 }
 
 // update the value of a countdown timer (seconds only)
-const displayCountdownVal = (endCallback, tp) => {
+const displayCountdownVal = (tp) => {
     tp.spCountdown.textContent = tp.restSec;
     if(tp.restSec > 0){    // still have more time to wait
         setTimeout(() => {
             --tp.restSec;
-            displayCountdownVal(endCallback, tp);
+            displayCountdownVal(tp);
         }, 1000);
     } else {            // time's up
-        endCallback(tp);
+        displaySetTimer(tp);
     }
 }
 
@@ -84,13 +84,12 @@ const displaySetTimer = (tp) => {
     divTimer.appendChild(tp.spSeconds);
     tp.spSeconds.after(" sec");
     tp.out.appendChild(divTimer);
-    // set working variables
     // perform the countdown
-    displaySetTimerVal(setComplete, tp);
+    displaySetTimerVal(tp);
 }
 
 // update the values of the set timer, minutes and seconds
-const displaySetTimerVal = (endCallback, tp) => {
+const displaySetTimerVal = (tp) => {
     tp.spMinutes.textContent = tp.curMin;
     tp.spSeconds.textContent = tp.curSec;
     if(tp.curMin > 0 || tp.curSec > 0){    // still have more time to wait
@@ -101,10 +100,10 @@ const displaySetTimerVal = (endCallback, tp) => {
             }else{
                 --tp.curSec;
             }
-            displaySetTimerVal(endCallback, tp);
+            displaySetTimerVal(tp);
         }, 1000);
     } else {            // time's up
-        endCallback(tp);
+        setComplete(tp);
     }
 }
 
