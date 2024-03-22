@@ -25,7 +25,9 @@ const performSets = (setNum, targetNum, minutes, rest, exercise) => {
         spSeconds:      undefined,      // timer seconds span
     };
 
-    displayCountdown(timeout_parms);
+    displayCountdown(timeout_parms)
+        .then(displaySetTimer)
+        .then(setComplete);
 }
 
 // display a countdown timer at the given element for the specified number
@@ -43,20 +45,22 @@ const displayCountdown = (tp) => {
     tp.spCountdown.after(" seconds...");
     // set working variables
     tp.restSec = tp.rest;
-    // perform the countdown
-    displayCountdownVal(tp);
+    return new Promise((resolve) => {
+        // perform the countdown
+        displayCountdownVal(tp, resolve);
+    });
 }
 
 // update the value of a countdown timer (seconds only)
-const displayCountdownVal = (tp) => {
+const displayCountdownVal = (tp, resolve) => {
     tp.spCountdown.textContent = tp.restSec;
     if(tp.restSec > 0){    // still have more time to wait
         setTimeout(() => {
             --tp.restSec;
-            displayCountdownVal(tp);
+            displayCountdownVal(tp, resolve);
         }, 1000);
     } else {            // time's up
-        displaySetTimer(tp);
+        resolve(tp);
     }
 }
 
@@ -84,12 +88,14 @@ const displaySetTimer = (tp) => {
     divTimer.appendChild(tp.spSeconds);
     tp.spSeconds.after(" sec");
     tp.out.appendChild(divTimer);
-    // perform the countdown
-    displaySetTimerVal(tp);
+    return new Promise((resolve) => {
+        // perform the countdown
+        displaySetTimerVal(tp, resolve);
+    });
 }
 
 // update the values of the set timer, minutes and seconds
-const displaySetTimerVal = (tp) => {
+const displaySetTimerVal = (tp, resolve) => {
     tp.spMinutes.textContent = tp.curMin;
     tp.spSeconds.textContent = tp.curSec;
     if(tp.curMin > 0 || tp.curSec > 0){    // still have more time to wait
@@ -100,10 +106,10 @@ const displaySetTimerVal = (tp) => {
             }else{
                 --tp.curSec;
             }
-            displaySetTimerVal(tp);
+            displaySetTimerVal(tp, resolve);
         }, 1000);
     } else {            // time's up
-        setComplete(tp);
+        resolve(tp);
     }
 }
 
