@@ -25,8 +25,11 @@ const performSets = (setNum, targetNum, minutes, rest, exercise) => {
         spSeconds:      undefined,      // timer seconds span
     };
 
+    // sequence of timed actions, implemented as a Promise sequence
     displayCountdown(timeout_parms)
         .then(displaySetTimer)
+        // we cannot use a .finally() for setComplete() because it does not
+        // allow passing of any data, so we must use another .then()
         .then(setComplete);
 }
 
@@ -59,8 +62,8 @@ const displayCountdownVal = (tp, resolve) => {
             --tp.restSec;
             displayCountdownVal(tp, resolve);
         }, 1000);
-    } else {            // time's up
-        resolve(tp);
+    } else {                // time's up
+        resolve(tp);        // performed resolution passed down
     }
 }
 
@@ -100,7 +103,7 @@ const displaySetTimerVal = (tp, resolve) => {
     tp.spSeconds.textContent = tp.curSec;
     if(tp.curMin > 0 || tp.curSec > 0){    // still have more time to wait
         setTimeout(() => {
-            if(!tp.curSec){      // seconds timer reached zero
+            if(!tp.curSec){     // seconds timer reached zero
                 --tp.curMin;
                 tp.curSec = 59;
             }else{
@@ -108,8 +111,8 @@ const displaySetTimerVal = (tp, resolve) => {
             }
             displaySetTimerVal(tp, resolve);
         }, 1000);
-    } else {            // time's up
-        resolve(tp);
+    } else {                    // time's up
+        resolve(tp);            // perform resolution passed down
     }
 }
 
